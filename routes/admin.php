@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use Livewire\Volt\Volt;
 
 /*
@@ -15,18 +14,15 @@ use Livewire\Volt\Volt;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () {
+    return 'admin';
 });
 
-Route::post('login', [LoginController::class, 'login'])->name('login');
-
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
+  'auth:sanctum',
+  config('jetstream.auth_session'),
+  'verified',
+  'admin',
 ])->group(function () {
-    Volt::route('/dashboard', 'dashboard')->name('dashboard');
-    Volt::route('/post', 'post.post')->name('post');
-    Volt::route('/post-create', 'post.post-create')->name('post.create');
+  Volt::route('/admin', 'admin.dashboard')->name('admin.dashboard');
 });
