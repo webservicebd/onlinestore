@@ -28,5 +28,7 @@ Route::middleware([
 ])->group(function () {
     Volt::route('/dashboard', 'dashboard')->name('dashboard');
     Volt::route('/post', 'post.post')->name('post');
-    Volt::route('/post-create', 'post.post-create')->name('post.create');
+    Volt::route('/post-create', 'post.create')->name('post.create');
+    Volt::route('/brand-create', 'brand.create')->name('brand.create');
+    Volt::route('/category-create', 'category.create')->name('category.create');
 });

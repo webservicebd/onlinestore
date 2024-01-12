@@ -31,10 +31,8 @@ class extends Component {
     ]);
 
     $this->reset();
-
     session()->flash('success', 'Post has been added');
-
-    }
+  }
 
 }
 
@@ -74,16 +72,16 @@ class extends Component {
                             @endif
                             <button type="submit" class="btn btn-primary w-25 float-end">Submit</button>
                         </div>
-                        @if(session('success'))
-                            @script
-                                <script>
-                                    swal("{{ session('success') }}");
-                                </script>
-                            @endscript
-                        @endif
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @if(session('success'))
+      @script
+        <script>
+          swal("{{ session('success') }}");
+        </script>
+      @endscript
+    @endif
 </div>

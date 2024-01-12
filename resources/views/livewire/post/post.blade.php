@@ -2,7 +2,6 @@
 
 use Livewire\Volt\Component;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\Post;
 

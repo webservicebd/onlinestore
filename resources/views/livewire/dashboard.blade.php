@@ -8,6 +8,7 @@ new
 #[Title('Dashboard')]
 
 class extends Component {
+  //
 
 }
 
@@ -15,14 +16,14 @@ class extends Component {
 
 <div>
     <style>
-        #menu1 .dropdown-menu {
+        #menu1 {
             background-color: #0a58ca;
         }
-        #menu1 .dropdown-menu a:hover {
+        #menu1 a:hover {
             background-color: #090;
         }
-        #menu1 .dropdown-menu a {
-            color:antiquewhite;
+        #menu1 a {
+            color: #fff;
         }
     </style>
 
@@ -34,14 +35,16 @@ class extends Component {
                         <h5 class="card-title text-white text-center">Post Dashboard</h5>
                     </div>
                     <div class="btn-group-vertical w-100" role="group" aria-label="Button group with nested dropdown">
+                        <a href="{{ url('brand-create') }}" class="btn btn-primary" wire:navigate>Create Brand</a>
+                        <a href="{{ url('category-create') }}" class="btn btn-primary" wire:navigate>Create Category</a>
                         <a href="{{ url('post') }}" class="btn btn-primary" wire:navigate>Post Dashboard</a>
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="menu1">
-                            <li><a class="dropdown-item" href="#">Dropdown link Dropdown link</a></li>
-                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                              <li><a class="dropdown-item" href="#">Dropdown link Dropdown link</a></li>
+                              <li><a class="dropdown-item" href="#">Dropdown link</a></li>
                             </ul>
                         </div>
                     </div>
