@@ -18,14 +18,13 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->integer('code')->nullable();
             $table->string('unit')->nullable();
-            $table->string('tag')->nullable();
+            $table->integer('buy_price')->nullable();
+            $table->integer('sale_price')->nullable();
+            $table->integer('discount')->nullable()->default(0);
+            $table->integer('stock')->nullable();
             $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->string('descript')->nullable();
-            $table->integer('buy_price')->nullable();
-            $table->integer('sale_price')->nullable();
-            $table->integer('discount')->nullable();
-            $table->integer('stock')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
