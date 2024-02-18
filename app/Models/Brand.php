@@ -14,7 +14,7 @@ class Brand extends Model
     'name',
     'slug',
   ];
-  // join child model into parent model
+  // relation parent model to child model
   // which match brands table primary id
   // with categories table foreignId brand_id
   public function categories () {

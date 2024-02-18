@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/myapp.css',
                 'resources/js/app.js',
+                'public/assets/js/guest.js',
             ],
             refresh: true,
         }),

@@ -34,10 +34,10 @@ class extends Component {
   public $sale_price;
   public $discount;
   #[Validate('required')]
-  public $stock;
+  public $qty;
   #[Validate('max:500|mimes:jpg,png')]
   public $image;
-  #[Validate('mimes:mp4')]
+  #[Validate('nullable|mimes:mp4')]
   public $video;
   public $descript;
 
@@ -49,18 +49,19 @@ class extends Component {
       'brand_id' => $this->brandId,
       'category_id' => $this->categoryId,
       'name' => Str::title($this->name),
+      'slug' => Str::slug($this->name, '-'),
       'code' => rand(1, 99999),
       'unit' => $this->unit,
       'buy_price' => $this->buy_price,
       'sale_price' => $this->sale_price,
       'discount' => $this->discount,
-      'stock' => $this->stock,
+      'qty' => $this->qty,
       'image' => $this->image->store('public/product'),
       'video' => $this->video->store('public/product'),
       'descript' => $this->descript,
     ]);
 
-    $this->reset();
+    $this->reset('name', 'unit', 'buy_price', 'sale_price', 'discount', 'qty', 'image', 'video', 'descript');
 
     session()->flash('success', 'Product has been created');
   }
@@ -161,9 +162,9 @@ class extends Component {
                 @enderror
               </div>
               <div class="col-md-3 mb-3">
-                <label for="stock" class="form-label">Stock</label>
-                <input type="number" wire:model="stock" class="form-control" id="stock">
-                @error('stock')
+                <label for="qty" class="form-label">Quantity</label>
+                <input type="number" wire:model="qty" class="form-control" id="qty">
+                @error('qty')
                   <span class="text-danger">{{ $message }}</span>
                 @enderror
               </div>

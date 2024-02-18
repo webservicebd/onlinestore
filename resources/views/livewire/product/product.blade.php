@@ -28,7 +28,7 @@ class extends Component {
   public $buy_price;
   public $sale_price;
   public $discount;
-  public $stock;
+  public $qty;
   public $oldImage;
   public $image;
   public $video;
@@ -45,7 +45,7 @@ class extends Component {
     $this->buy_price = $product->buy_price;
     $this->sale_price = $product->sale_price;
     $this->discount = $product->discount;
-    $this->stock = $product->stock;
+    $this->qty = $product->qty;
     $this->descript = $product->descript;
     $this->brands = Brand::all();
   }
@@ -66,12 +66,13 @@ class extends Component {
       'brand_id' => $this->brandId,
       'category_id' => $this->categoryId,
       'name' => Str::title($this->name),
+      'slug' => Str::slug($this->name, '-'),
       'code' => rand(1, 99999),
       'unit' => $this->unit,
       'buy_price' => $this->buy_price,
       'sale_price' => $this->sale_price,
       'discount' => $this->discount,
-      'stock' => $this->stock,
+      'qty' => $this->qty,
       'descript' => $this->descript,
     ]);
 
@@ -92,8 +93,8 @@ class extends Component {
   public function updateFile () {
 
     $this->validate([
-      'image' => 'required|max:500|mimes:jpg,png',
-      'video' => 'mimes:mp4',
+      'image' => 'nullable|max:500|mimes:jpg,png',
+      'video' => 'nullable|mimes:mp4',
     ]);
 
     if ($this->image) {
@@ -257,8 +258,8 @@ class extends Component {
               <input type="number" wire:model="discount" class="form-control" id="discount">
             </div>
             <div class="mb-3">
-              <label for="stock" class="form-label">Stock</label>
-              <input type="number" wire:model="stock" class="form-control" id="stock">
+              <label for="qty" class="form-label">Quantity</label>
+              <input type="number" wire:model="qty" class="form-control" id="qty">
             </div>
             <div class="mb-3">
               <label for="descript" class="form-label">Description</label>

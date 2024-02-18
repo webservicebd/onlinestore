@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Section: Design Block -->
-    <section class="background-radial-gradient overflow-hidden">
+    <section class="background-radial-gradient overflow-hidden min-vh-100">
     <style>
       .background-radial-gradient {
         background-color: hsl(218, 41%, 15%);

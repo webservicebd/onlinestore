@@ -14,10 +14,6 @@ use Livewire\Volt\Volt;
 |
 */
 
-Route::get('/test', function () {
-    return 'admin';
-});
-
 Route::middleware([
   'auth:sanctum',
   config('jetstream.auth_session'),

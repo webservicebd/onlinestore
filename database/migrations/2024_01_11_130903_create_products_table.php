@@ -16,12 +16,13 @@ return new class extends Migration
             $table->foreignId('brand_id');
             $table->foreignId('category_id');
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->integer('code')->nullable();
             $table->string('unit')->nullable();
             $table->integer('buy_price')->nullable();
             $table->integer('sale_price')->nullable();
             $table->integer('discount')->nullable()->default(0);
-            $table->integer('stock')->nullable();
+            $table->integer('qty')->nullable();
             $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->string('descript')->nullable();

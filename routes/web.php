@@ -15,11 +15,12 @@ use Livewire\Volt\Volt;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::post('login', [LoginController::class, 'login'])->name('login');
+Volt::route('/', 'guest.shop')->name('shop');
+Volt::route('/product/{product}', 'guest.product')->name('product');
+Volt::route('/about', 'guest.about')->name('about');
+Volt::route('/contact', 'guest.contact')->name('contact');
 
 Route::middleware([
     'auth:sanctum',
