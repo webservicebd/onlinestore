@@ -11,7 +11,6 @@
 
         <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/templatemo.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/assets/css/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/fontawesome.min.css') }}">
 
         <!-- Load map styles -->

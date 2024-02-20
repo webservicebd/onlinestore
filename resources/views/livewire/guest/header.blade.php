@@ -1,8 +1,23 @@
 <?php
 
-use function Livewire\Volt\{state};
+use Livewire\Volt\Component;
+use Livewire\Attributes\On;
 
-//
+new
+
+class extends Component {
+
+#[On('reload')]
+
+public function reload(){
+  //
+}
+
+public function destroyCart(){
+  Cart::destroy();
+}
+
+}
 
 ?>
 
@@ -79,9 +94,9 @@ use function Livewire\Volt\{state};
                 <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search text-dark mr-2"></i>
                 </a>
-                <a class="nav-icon position-relative text-decoration-none" href="#">
+                <a  class="nav-icon position-relative text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#showCartModal">
                     <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</span>
                 </a>
                 <a class="nav-icon position-relative text-decoration-none" href="#">
                     <i class="fa fa-fw fa-user text-dark mr-3"></i>
@@ -92,7 +107,7 @@ use function Livewire\Volt\{state};
       </div>
   </nav>
   <!-- Close Header -->
-  <!-- Modal -->
+  <!-- Search Modal -->
   <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="w-100 pt-1 mb-5 text-right">
@@ -106,6 +121,52 @@ use function Livewire\Volt\{state};
                 </button>
             </div>
         </form>
+    </div>
+  </div>
+  <!-- show Cart Modal -->
+  <div wire:ignore.self class="modal fade" id="showCartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <form wire:submit="updateData">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Show Cart</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SL</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                @php $i =1; @endphp
+                @foreach (Cart::content() as $item)
+                  <tr>
+                    <th scope="row">{{ $i }}</th>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->price }}</td>
+                    <td><input type="number" value="{{ $item->qty }}"/></td>
+                    <td>{{ $item->total }}</td>
+                  </tr>
+                  @php $i++; @endphp
+                @endforeach
+              </tbody>
+            </table>
+            @if(session('success'))
+              <h6 class="alert alert-success text-center">{{ session('success') }}</h6>
+            @endif
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" wire:click='destroyCart()'>Clear</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>

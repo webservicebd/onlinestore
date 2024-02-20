@@ -22,7 +22,7 @@ class extends Component {
   public $sale_price;
   public $descript;
 
-  public Product $product;
+  public $product;
 
   public function mount(Product $product)
   {

@@ -181,7 +181,7 @@ class extends Component {
                     <button type="button" wire:click='showData({{ $product->id }})' data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-link float-start">
                       <i class="fas fa-pen-square" style="font-size: 30px;"></i>
                     </button>
-                    <button type="button" wire:click="delete({{ $product }})"
+                    <button type="button" wire:click="delete({{ $product->id }})"
                         wire:confirm="Are you sure you want to delete this post?"
                         class="btn btn-link btn-inline">
                         <i class="fas fa-trash" style="font-size: 30px;"></i>

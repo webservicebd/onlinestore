@@ -1,10 +1,11 @@
 <?php
 
-use Livewire\Attributes\{Layout, Title};
 use Livewire\Volt\Component;
+use Livewire\Attributes\{Layout, Title};
 use App\Models\Product;
 use App\Models\Brand;
 use Livewire\WithPagination;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 new
 
@@ -16,11 +17,22 @@ class extends Component {
 
   use WithPagination;
 
+  public function addCart(Product $product){
+    Cart::add(
+      $product->id,
+      $product->name,
+      1,
+      $product->sale_price,
+    );
+    $this->dispatch('reload');
+  }
+
   public function with(): array
   {
     return [
       'products' => Product::latest()->paginate(9),
       'brands' => Brand::all(),
+      'cart' => Cart::content(),
     ];
   }
 
@@ -90,7 +102,14 @@ class extends Component {
                           <img class="card-img rounded-0 img-fluid" src="{{ asset('storage/app/'.$product->image) }}">
                           <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                               <ul class="list-unstyled">
-                                  <li><a class="btn btn-success text-white mt-2" href="{{ url('product/'.$product->id) }}"><i class="far fa-eye"></i></a></li>
+                                  <li><a class="btn btn-success text-white mt-2" href="{{ route('product', $product->id) }}"><i class="far fa-eye"></i></a></li>
+                                  <li>
+                                    @if($cart->where('id', $product->id)->count())
+                                      <h4 class="text-white mt-2">In cart</h4>
+                                    @else
+                                      <button type="button" wire:click='addCart({{ $product->id }})' class="btn btn-success text-white mt-2"><i class="fas fa-cart-plus"></i></button>
+                                    @endif
+                                  </li>
                               </ul>
                           </div>
                       </div>
@@ -127,7 +146,6 @@ class extends Component {
   </div>
 </div>
 <!-- End Content -->
-
 <!-- Start Brands -->
 <section class="bg-light py-5">
   <div class="container my-4">
@@ -232,28 +250,28 @@ class extends Component {
 </section>
 <!--End Brands-->
 
-    <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+<!-- Start Footer -->
+<footer class="bg-dark" id="tempaltemo_footer">
 
-      <div class="w-100 bg-black py-3">
-          <div class="container">
-              <div class="row pt-2">
-                  <div class="col-6">
-                      <p class="text-left text-light">
-                          Copyright &copy; 2021 Company Name
-                          | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                      </p>
-                  </div>
-                  <div class="col-6">
-                  <label class="sr-only" for="subscribeEmail">Email address</label>
-                  <div class="input-group mb-2">
-                      <input type="text" class="form-control bg-dark border-light text-white" id="subscribeEmail" placeholder="Email address">
-                      <div class="input-group-text btn-success text-light">Subscribe</div>
-                  </div>
+  <div class="w-100 bg-black py-3">
+      <div class="container">
+          <div class="row pt-2">
+              <div class="col-6">
+                  <p class="text-left text-light">
+                      Copyright &copy; 2021 Company Name
+                      | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                  </p>
               </div>
+              <div class="col-6">
+              <label class="sr-only" for="subscribeEmail">Email address</label>
+              <div class="input-group mb-2">
+                  <input type="text" class="form-control bg-dark border-light text-white" id="subscribeEmail" placeholder="Email address">
+                  <div class="input-group-text btn-success text-light">Subscribe</div>
               </div>
           </div>
+          </div>
       </div>
+  </div>
 
   </footer>
   <!-- End Footer -->

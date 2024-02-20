@@ -21,6 +21,7 @@ Volt::route('/', 'guest.shop')->name('shop');
 Volt::route('/product/{product}', 'guest.product')->name('product');
 Volt::route('/about', 'guest.about')->name('about');
 Volt::route('/contact', 'guest.contact')->name('contact');
+Volt::route('/show-cart', 'guest.show-cart')->name('show.cart');
 
 Route::middleware([
     'auth:sanctum',
